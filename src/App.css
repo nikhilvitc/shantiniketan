@@ -12,20 +12,6 @@ body {
   box-sizing: border-box;
 }
 
-.input-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 20px;
-}
-
-.input-form label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  width: 200px;
-}
-
 .marksheet {
   position: relative;
   padding: 20px;
@@ -35,11 +21,11 @@ body {
 
 .watermark {
   position: absolute;
-  top: 330px;
+  top: 270px;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0.1;
-  width: 400px;
+  width: 300px;
   z-index: 0;
 }
 
@@ -53,14 +39,7 @@ body {
 
 .header .left,
 .header .right {
-  font-weight: bold;
-  font-size: 14px;
-  width: 130px;
-}
-
-.header .right p {
-  white-space: nowrap;
-  margin: 0;
+  width: 110px;
 }
 
 .header .center {
@@ -92,8 +71,8 @@ body {
 .student-details {
   margin-top: 10px;
   font-weight: bold;
-  z-index: 1;
   position: relative;
+  z-index: 1;
 }
 
 .marks-table {
@@ -111,31 +90,46 @@ body {
   padding: 5px;
 }
 
-.mark-input {
-  width: 60px;
-  padding: 4px;
-  text-align: center;
-}
-
 .summary,
 .remarks {
-  margin-top: 15px;
+  margin-top: 10px;
   font-weight: bold;
   position: relative;
   z-index: 1;
 }
 
-.signature-section {
-  margin-top: 60px;
-  text-align: right;
-  position: relative;
-  z-index: 1;
+.marksheet-sign-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
-.signature {
-  width: 120px;
-  display: block;
-  margin-left: auto;
+.marksheet-sign-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 32px;
+}
+
+.marksheet-signature {
+  width: 150px;
+  height: auto;
+}
+
+.marksheet-sign-label {
+  font-size: 1.3rem;
+  margin-top: 6px;
+  color: #222;
+  text-align: right;
+}
+
+.marksheet-mohar {
+  width: 180px;
+  height: auto;
+  margin-bottom: 4px;
 }
 
 .download-btn {
@@ -151,4 +145,36 @@ body {
 
 .download-btn:hover {
   background-color: #0056b3;
+}
+
+@media print {
+  html, body {
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .container,
+  .marksheet-container {
+    padding: 0 8mm !important;
+    box-sizing: border-box !important;
+    height: 100% !important;
+    max-height: 294mm !important;
+    overflow: hidden !important;
+    page-break-inside: avoid !important;
+  }
+
+  .marksheet {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .download-btn {
+    display: none !important;
+  }
 }

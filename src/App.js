@@ -5,6 +5,7 @@ import html2pdf from "html2pdf.js";
 import logo from "./assets/logo.png";
 import signature from "./assets/signature.png";
 import watermark from "./assets/watermark.png"; // 10% opacity image
+import mohar from './assets/mohar.png';
 
 const sessions = Array.from({ length: 12 }, (_, i) => `${2016 + i}–${17 + i}`);
 
@@ -140,7 +141,7 @@ function App() {
               <tr key={subject}>
                 <td>{subject}</td>
                 <td>100</td>
-                <td>40</td>
+                <td>30</td>
                 <td></td>
                 <td></td>
                 <td>
@@ -173,9 +174,12 @@ function App() {
           </p>
         </div>
 
-        <div className="signature-section">
-          <img src={signature} alt="Signature" className="signature" />
-          <p>Sign. of Principal</p>
+        <div className="marksheet-sign-row">
+          <div className="marksheet-sign-block">
+            <img src={require('./assets/signature.png')} alt="Principal Signature" className="marksheet-signature" />
+            <div className="marksheet-sign-label">Sign. of Principal</div>
+            <img src={mohar} alt="School Stamp" className="marksheet-mohar" />
+          </div>
         </div>
       </div>
 
