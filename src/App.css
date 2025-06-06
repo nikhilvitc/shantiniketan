@@ -1,0 +1,154 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 850px;
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.input-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.input-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  width: 200px;
+}
+
+.marksheet {
+  position: relative;
+  padding: 20px;
+  border: 1px solid black;
+  background: white;
+}
+
+.watermark {
+  position: absolute;
+  top: 330px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.1;
+  width: 400px;
+  z-index: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.header .left,
+.header .right {
+  font-weight: bold;
+  font-size: 14px;
+  width: 130px;
+}
+
+.header .right p {
+  white-space: nowrap;
+  margin: 0;
+}
+
+.header .center {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+.center h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.center h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.center p {
+  margin: 4px 0;
+}
+
+.student-details {
+  margin-top: 10px;
+  font-weight: bold;
+  z-index: 1;
+  position: relative;
+}
+
+.marks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  z-index: 1;
+  position: relative;
+}
+
+.marks-table th,
+.marks-table td {
+  border: 1px solid #000;
+  text-align: center;
+  padding: 5px;
+}
+
+.mark-input {
+  width: 60px;
+  padding: 4px;
+  text-align: center;
+}
+
+.summary,
+.remarks {
+  margin-top: 15px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.signature-section {
+  margin-top: 60px;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+
+.signature {
+  width: 120px;
+  display: block;
+  margin-left: auto;
+}
+
+.download-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}
