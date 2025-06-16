@@ -1,3 +1,4 @@
+/** App.css */
 body {
   font-family: Arial, sans-serif;
   background-color: #fff;
@@ -6,32 +7,33 @@ body {
 }
 
 .container {
-  width: 800px;
-  margin: 20px auto;
-  padding: 20px 40px;
+  width: 794px;
+  margin: 0 auto;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .marksheet {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 900px; /* Carefully adjusted to fit A4 single page */
-  padding: 20px;
+  width: 100%;
+  min-height: 1000px;
+  padding: 20px 40px;
   border: 2px solid black;
   background: white;
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
 }
 
 .watermark {
   position: absolute;
-  top: 350px;
+  top: 370px;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.1;
-  width: 300px;
+  opacity: 0.05;
+  width: 400px;
   z-index: 0;
 }
 
@@ -54,19 +56,19 @@ body {
 }
 
 .logo {
-  width: 110px;
+  width: 150px;
   height: auto;
   margin-bottom: 4px;
 }
 
 .center h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .center h3 {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
 }
 
@@ -96,6 +98,12 @@ body {
   padding: 5px;
 }
 
+.marks-table input[type="number"] {
+  width: 60px;
+  padding: 2px;
+  text-align: center;
+}
+
 .summary,
 .remarks {
   margin-top: 10px;
@@ -104,7 +112,6 @@ body {
   z-index: 1;
 }
 
-/* Bottom-right fixed signature block */
 .marksheet-sign-row {
   display: flex;
   justify-content: flex-end;
@@ -136,7 +143,7 @@ body {
 }
 
 .marksheet-mohar {
-  width: 180px;
+  width: 220px;
   height: auto;
   margin-bottom: 4px;
 }
@@ -168,23 +175,21 @@ body {
     print-color-adjust: exact !important;
   }
 
-  .container,
-  .marksheet-container {
-    padding: 0 8mm !important;
-    box-sizing: border-box !important;
+  .container {
+    width: 100% !important;
     height: 100% !important;
-    max-height: 294mm !important;
-    overflow: hidden !important;
-    page-break-inside: avoid !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .marksheet {
-    margin-bottom: 0 !important;
+    min-height: 100% !important;
     padding-bottom: 0 !important;
-    height: auto !important;
+    page-break-inside: avoid !important;
   }
 
-  .download-btn {
+  .download-btn,
+  .mark-input {
     display: none !important;
   }
 }
