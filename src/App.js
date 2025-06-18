@@ -1,9 +1,8 @@
-// App.js
 import React, { useState, useRef } from "react";
+import html2pdf from "html2pdf.js";
 import students from "./students";
 
 import "./App.css";
-import html2pdf from "html2pdf.js";
 
 import logo from "./assets/logo.png";
 import signature from "./assets/signature.png";
@@ -28,9 +27,18 @@ function App() {
   const [name, setName] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [studentClass, setStudentClass] = useState("");
+
   const [term1, setTerm1] = useState(Array(subjects.length).fill(""));
   const [term2, setTerm2] = useState(Array(subjects.length).fill(""));
+  const [selectedSubjects, setSelectedSubjects] = useState(Array(subjects.length).fill(true));
+
   const marksheetRef = useRef();
+
+  const handleSubjectToggle = (index) => {
+    const updated = [...selectedSubjects];
+    updated[index] = !updated[index];
+    setSelectedSubjects(updated);
+  };
 
   const handleTermChange = (termSetter, index, value) => {
     const updated = [...termSetter];
@@ -38,9 +46,17 @@ function App() {
     termSetter === term1 ? setTerm1(updated) : setTerm2(updated);
   };
 
-  const finalMarks = term1.map((t1, i) => (parseInt(t1) || 0) + (parseInt(term2[i]) || 0));
+  const activeSubjects = subjects
+    .map((subject, index) => ({ subject, index }))
+    .filter((_, index) => selectedSubjects[index]);
+
+  const finalMarks = activeSubjects.map(({ index }) => {
+    return (parseInt(term1[index]) || 0) + (parseInt(term2[index]) || 0);
+  });
+
   const totalMarks = finalMarks.reduce((acc, val) => acc + val, 0);
-  const percentage = (totalMarks / (subjects.length * 100)) * 100;
+  const maxTotal = activeSubjects.length * 100;
+  const percentage = maxTotal > 0 ? (totalMarks / maxTotal) * 100 : 0;
 
   const downloadPDF = () => {
     const inputs = document.querySelectorAll(".mark-input");
@@ -68,7 +84,6 @@ function App() {
       .from(element)
       .save()
       .then(() => {
-        // Restore inputs after download
         const spans = document.querySelectorAll(".mark-span");
         spans.forEach((span, i) => {
           const input = document.createElement("input");
@@ -89,9 +104,7 @@ function App() {
           Session:
           <select value={session} onChange={(e) => setSession(e.target.value)}>
             {sessions.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
+              <option key={s} value={s}>{s}</option>
             ))}
           </select>
         </label>
@@ -120,7 +133,7 @@ function App() {
             <h3>BEDAUL ADAM, PURNAHIYA, SHEOHAR </h3>
             <p><strong>Session:</strong> {session}</p>
           </div>
-          <div className="right"><p><strong></strong> </p></div>
+          <div className="right"></div>
         </div>
 
         <div className="student-details">
@@ -132,34 +145,44 @@ function App() {
         <table className="marks-table">
           <thead>
             <tr>
+              <th>Select</th>
               <th>Subject</th>
               <th>Term I (50 marks)</th>
               <th>Term II (50 marks)</th>
-              <th>Term I +Term II (100 marks) </th>
+              <th>Total (100 marks)</th>
             </tr>
           </thead>
           <tbody>
             {subjects.map((subject, index) => (
-              <tr key={subject}>
-                <td>{subject}</td>
-                <td>
-                  <input
-                    type="number"
-                    className="mark-input"
-                    value={term1[index]}
-                    onChange={(e) => handleTermChange(term1, index, e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    className="mark-input"
-                    value={term2[index]}
-                    onChange={(e) => handleTermChange(term2, index, e.target.value)}
-                  />
-                </td>
-                <td>{finalMarks[index]}</td>
-              </tr>
+              selectedSubjects[index] && (
+                <tr key={subject}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selectedSubjects[index]}
+                      onChange={() => handleSubjectToggle(index)}
+                    />
+                  </td>
+                  <td>{subject}</td>
+                  <td>
+                    <input
+                      type="number"
+                      className="mark-input"
+                      value={term1[index]}
+                      onChange={(e) => handleTermChange(term1, index, e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      className="mark-input"
+                      value={term2[index]}
+                      onChange={(e) => handleTermChange(term2, index, e.target.value)}
+                    />
+                  </td>
+                  <td>{finalMarks[activeSubjects.findIndex(s => s.index === index)] || 0}</td>
+                </tr>
+              )
             ))}
           </tbody>
         </table>
